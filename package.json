@@ -9,6 +9,6 @@
         "lint:js": "eslint js",
         "lint:css": "stylelint css",
         "lint:html": "htmlhint **/*.html",
-        "build": "cp index.html dist/ && cp -r assets/ dist/assets/"
+        "build": "cp index.html public/ && cp -r assets/ public/assets/ && cp -r css/ public/css/ && cp -r js/ public/js/"
     }
 }
