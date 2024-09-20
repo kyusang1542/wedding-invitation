@@ -12,7 +12,7 @@ export const guest = (() => {
         const count = (new Date(until)).getTime();
 
         setInterval(() => {
-            const distance = Math.abs(count - (new Date()).getTime());
+            const distance = count - (new Date()).getTime();
 
             document.getElementById('day').innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
             document.getElementById('hour').innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -62,7 +62,7 @@ export const guest = (() => {
         })();
     };
 
-    const open = (button) => {
+    const open = (button, lang) => {
         button.disabled = true;
         confetti({
             origin: { y: 1 },
@@ -78,13 +78,38 @@ export const guest = (() => {
 
         theme.showButtonChangeTheme();
         setTimeout(animation, 1500);
+
+        sessionStorage.setItem('lang', lang);
+        updateContent(lang);
     };
 
-    const notOepn = (button) => {
-        alert("죄송합니다. 해당 언어는 지원 예정입니다.\nขออภัย ภาษาดังกล่าวยังไม่รองรับในขณะนี้\nSorry, the language is not yet supported.");
-    }
+    const updateContent = (lang) => {
+        document.body.classList.remove('lang-ko', 'lang-th', 'lang-en');
+        document.body.classList.add(`lang-${lang}`);
+
+        if (lang === 'ko') {
+            document.title = '이영노 ♥️ 잉(Eng) 결혼식에 초대합니다.';
+        } else if (lang === 'th') {
+            document.title = 'ขอเชิญร่วมงานแต่งงานของ ยองโน ลี ♥️ อิง(Eng)';
+        } else if (lang === 'en') {
+            document.title = 'You are invited to the wedding of Youngno Lee ♥️ Eng';
+        }
+
+        document.getElementById('countdown-day-label').innerText = langLabels[lang].day;
+        document.getElementById('countdown-hour-label').innerText = langLabels[lang].hour;
+        document.getElementById('countdown-minute-label').innerText = langLabels[lang].minute;
+        document.getElementById('countdown-second-label').innerText = langLabels[lang].second;
+    };
+
+    const langLabels = {
+        'ko': { day: '일', hour: '시', minute: '분', second: '초' },
+        'th': { day: 'วัน', hour: 'ชั่วโมง', minute: 'นาที', second: 'วินาที' },
+        'en': { day: 'Days', hour: 'Hours', minute: 'Minutes', second: 'Seconds' }
+    };
 
     const init = () => {
+        const lang = sessionStorage.getItem('lang') || 'ko';
+        updateContent(lang);
 
         const info = document.getElementById('information');
         if (info && storage('information').get('info')) {
@@ -104,10 +129,10 @@ export const guest = (() => {
                     item.remove();
                 }
             }
-           
+
             return;
         }
-        
+
         countDownDate();
         session.guest();
     };
@@ -115,6 +140,5 @@ export const guest = (() => {
     return {
         init,
         open,
-        notOepn,
     };
 })();

@@ -29,6 +29,7 @@ body {
 }
 
 
+
 .btn-spacing {
     margin-right: 0.5rem;
 }
@@ -246,3 +247,29 @@ footer {
 #comment{
     display: none;
 }
+
+.lang { display: none !important; }
+
+body.lang-ko .lang-ko { display: inline !important; }
+body.lang-ko .lang-ko.d-block { display: block !important; }
+
+body.lang-th .lang-th {
+    display: inline !important;
+    font-family: "Kanit", sans-serif;
+    font-style: normal;
+    font-size: 0.7em;
+}
+body.lang-th .lang-th.d-block {
+    display: block !important;
+    font-family: "Kanit", sans-serif;
+    font-style: normal;
+    font-size: 0.7em;
+}
+
+body.lang-en .lang-en { display: inline !important; }
+body.lang-en .lang-en.d-block { display: block !important; }
+
+
+
+.lang-d-block { display: none;
+    display: block !important;}

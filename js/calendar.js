@@ -25,7 +25,9 @@ function createCalendar(id, date) {
 
     var calendarHTML = '';
     calendarHTML += '<div id="header">';
-    calendarHTML += '<span id="date">' + currentMonth + '<font>월</font></span>';
+    calendarHTML += '<span id="date" class="lang lang-ko">' + currentMonth + '<font>월</font></span>';
+    calendarHTML += '<span id="date" class="lang lang-th">ตุลาคม</span>';
+    calendarHTML += '<span id="date" class="lang lang-en">October</span>';
     calendarHTML += '</div>';
     calendarHTML += '<table border="0" cellspacing="0" cellpadding="0">';
     calendarHTML += '<tbody>';
